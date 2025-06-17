@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vergleich klassischer und moderner maschineller Lernverfahren</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .footnote-ref {
+            vertical-align: super;
+            font-size: 0.75em;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .tab-button {
+            white-space: nowrap;
+        }
+        .tab-button.active {
+            border-bottom: 2px solid #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        .scroll-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .scroll-container::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+        }
+        .scroll-container {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <h1 class="text-3xl font-bold text-gray-900">KI und Big Data: Ein Vergleich von Lernverfahren</h1>
+            <p class="text-md text-gray-600 mt-1">Eine Übersicht für die Lerngruppe zum Lernfeld B.4</p>
+        </div>
+        <!-- Navigation Tabs -->
+        <nav class="bg-gray-100 border-b border-gray-200">
+            <div class="container mx-auto px-6 scroll-container">
+                <div class="flex">
+                    <button class="tab-button active py-3 px-4 text-sm font-medium text-gray-500 hover:text-blue-500 focus:outline-none" onclick="showSection('intro')">Einleitung</button>
+                    <button class="tab-button py-3 px-4 text-sm font-medium text-gray-500 hover:text-blue-500 focus:outline-none" onclick="showSection('decision-trees')">Entscheidungsbäume</button>
+                    <button class="tab-button py-3 px-4 text-sm font-medium text-gray-500 hover:text-blue-500 focus:outline-none" onclick="showSection('random-forest')">Random Forest</button>
+                    <button class="tab-button py-3 px-4 text-sm font-medium text-gray-500 hover:text-blue-500 focus:outline-none" onclick="showSection('svm')">Support Vector Machines</button>
+                    <button class="tab-button py-3 px-4 text-sm font-medium text-gray-500 hover:text-blue-500 focus:outline-none" onclick="showSection('kmeans')">k-Means-Clustering</button>
+                    <button class="tab-button py-3 px-4 text-sm font-medium text-gray-500 hover:text-blue-500 focus:outline-none" onclick="showSection('naive-bayes')">Naive Bayes</button>
+                    <button class="tab-button py-3 px-4 text-sm font-medium text-gray-500 hover:text-blue-500 focus:outline-none" onclick="showSection('lstm')">LSTM</button>
+                    <button class="tab-button py-3 px-4 text-sm font-medium text-gray-500 hover:text-blue-500 focus:outline-none" onclick="showSection('transformer')">Transformer</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6">
+        
+        <!-- Introduction Section -->
+        <section id="intro" class="content-section active">
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">Willkommen zur Präsentation</h2>
+                <p class="mb-4">Diese interaktive Präsentation bietet eine detaillierte Untersuchung klassischer und moderner Verfahren des maschinellen Lernens. Jedes Verfahren wird anhand seiner Funktionsweise, vielfältiger Anwendungsbeispiele und seiner spezifischen Stärken und Schwächen beleuchtet.</p>
+                <p class="mb-4">Die Aufgabe besteht darin, ein Verfahren auszuwählen, es zu analysieren und die Ergebnisse verständlich zu präsentieren. Diese Webseite dient als umfassende Ressource für diese Aufgabe.</p>
+                <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-400 text-blue-800">
+                    <p><strong class="font-semibold">Ziel:</strong> Ein tiefes Verständnis für die Funktionsweise, Anwendbarkeit und die Abgrenzung der verschiedenen Algorithmen untereinander und zu neuronalen Netzen zu entwickeln.</p>
+                </div>
+                <p class="mt-6">Nutzen Sie die Navigationsleiste oben, um zwischen den verschiedenen Abschnitten zu wechseln. Jeder Abschnitt behandelt ein spezifisches Lernverfahren.</p>
+            </div>
+        </section>
+
+        <!-- Decision Trees Section -->
+        <section id="decision-trees" class="content-section">
+             <div class="bg-white p-8 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">Entscheidungsbäume (Decision Trees)</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Grundprinzipien und Funktionsweise</h3>
+                        <p>Ein Entscheidungsbaum zerlegt Daten durch eine Reihe von „Wenn-Dann“-Fragen, die in einer baumartigen Struktur angeordnet sind. An jedem Knoten wird das Merkmal ausgewählt, das die Daten am besten in möglichst „reine“ Gruppen aufteilt, bis an den Blättern eine endgültige Entscheidung (Klasse oder Wert) steht. Die Stärke liegt in der leichten Interpretierbarkeit der Ergebnisse.<sup class="footnote-ref">[1]</sup></p>
+
+                        <h3 class="text-xl font-semibold mt-6 mb-2">Demonstration: Kreditwürdigkeit</h3>
+                        <p class="mb-4">Ein Kunde beantragt einen Kredit mit folgenden Daten: Einkommen = 40.000€, Anstellungsdauer = 3 Jahre, bestehende Schulden = Ja.</p>
+                        <div class="border-l-4 border-gray-300 pl-4 text-sm">
+                            <p class="mb-2"><strong>1. Frage (Wurzel):</strong> Einkommen > 50.000€? <span class="font-semibold text-red-600">→ Nein</span></p>
+                            <p class="mb-2"><strong>2. Frage:</strong> Anstellungsdauer > 5 Jahre? <span class="font-semibold text-red-600">→ Nein</span></p>
+                            <p class="mb-2"><strong>3. Frage:</strong> Bestehen Schulden? <span class="font-semibold text-green-600">→ Ja</span></p>
+                            <p class="font-bold"><strong>Ergebnis (Blatt):</strong> Kredit ablehnen.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Entscheidungsbaum-Struktur" alt="Bild eines Entscheidungsbaums" class="rounded-lg shadow-md">
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-8 mb-4">15 Reale Anwendungsbeispiele</h3>
+                <ul class="list-disc list-inside grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2 text-sm">
+                    <li><strong>Bankwesen:</strong> Kreditrisikobewertung<sup class="footnote-ref">[2]</sup></li>
+                    <li><strong>Medizin:</strong> Diagnoseunterstützung (z.B. Herzkrankheiten)</li>
+                    <li><strong>Personalwesen:</strong> Vorhersage von Mitarbeiterkündigungen</li>
+                    <li><strong>Marketing:</strong> Kundensegmentierung für Kampagnen</li>
+                    <li><strong>Telekommunikation:</strong> Vorhersage von Kundenabwanderung (Churn)</li>
+                    <li><strong>Fertigung:</strong> Qualitätskontrolle und Fehlererkennung</li>
+                    <li><strong>Versicherung:</strong> Betrugserkennung bei Schadensmeldungen</li>
+                    <li><strong>Landwirtschaft:</strong> Vorhersage von Ernteerträgen</li>
+                    <li><strong>Energie:</strong> Prognose des Stromverbrauchs</li>
+                    <li><strong>Pharmazie:</strong> Identifikation von Wirkstoffkandidaten</li>
+                    <li><strong>Einzelhandel:</strong> Optimierung der Lagerhaltung</li>
+                    <li><strong>Bildung:</strong> Identifikation von Schülern mit Lernschwierigkeiten</li>
+                    <li><strong>Justiz:</strong> Vorhersage der Rückfallwahrscheinlichkeit von Straftätern</li>
+                    <li><strong>Geologie:</strong> Identifizierung von potenziellen Rohstoffvorkommen</li>
+                    <li><strong>Technischer Support:</strong> Automatisierte Fehlerdiagnose-Systeme<sup class="footnote-ref">[1]</sup></li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mt-8 mb-2">Analyse und Reflexion</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h4 class="font-bold text-green-800 mb-2">Besonders geeignet für:</h4>
+                        <ul class="list-disc list-inside">
+                            <li>Tabellarische Daten (Excel, Datenbanken)</li>
+                            <li>Wenn Interpretierbarkeit entscheidend ist</li>
+                            <li>Probleme mit gemischten Datentypen</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <h4 class="font-bold text-red-800 mb-2">Weniger geeignet für:</h4>
+                        <ul class="list-disc list-inside">
+                            <li>Bild- und Spracherkennung (unstrukturierte Daten)</li>
+                            <li>Neigt zu Überanpassung (Overfitting)</li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="mt-6 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
+                    <h4 class="font-bold text-blue-800 mb-2">Vergleich mit Anderen</h4>
+                    <p class="text-sm">Entscheidungsbäume sind die Grundlage für **Random Forests**, die deren Hauptschwäche (Overfitting) beheben. Gegenüber **Neuronalen Netzen** sind sie bei tabellarischen Daten oft schneller und immer interpretierbar, aber bei komplexen Mustern in unstrukturierten Daten (Bildern, Tönen) unterlegen.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Random Forest Section -->
+        <section id="random-forest" class="content-section">
+             <div class="bg-white p-8 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">Random Forest</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Grundprinzipien und Funktionsweise</h3>
+                        <p>Ein Random Forest ist ein Ensemble-Verfahren, das aus einer Vielzahl von Entscheidungsbäumen besteht. Jeder Baum wird auf einer zufälligen Teilmenge der Daten und Merkmale trainiert. Die endgültige Vorhersage entsteht durch eine "Abstimmung": Bei Klassifikationen gewinnt die am häufigsten vorhergesagte Klasse, bei Regressionen wird der Mittelwert der Ergebnisse gebildet. Dies reduziert die Überanpassung (Overfitting) einzelner Bäume drastisch und erhöht die Genauigkeit.<sup class="footnote-ref">[3]</sup></p>
+
+                        <h3 class="text-xl font-semibold mt-6 mb-2">Demonstration: Aktienmarktprognose</h3>
+                        <p class="mb-4">Ein Modell soll vorhersagen, ob eine Aktie am nächsten Tag steigt oder fällt.</p>
+                        <div class="border-l-4 border-gray-300 pl-4 text-sm">
+                            <p class="mb-2"><strong>1. Baum-Erstellung:</strong> Es werden 500 Entscheidungsbäume erstellt. Jeder Baum "sieht" nur zufällig ausgewählte historische Daten (z.B. Kurs der letzten 10 Tage, Handelsvolumen).</p>
+                            <p class="mb-2"><strong>2. Einzelprognose:</strong> Jeder der 500 Bäume trifft eine eigene Vorhersage ("steigt" oder "fällt").</p>
+                            <p class="font-bold"><strong>Ergebnis (Mehrheitsentscheid):</strong> Wenn 350 Bäume "steigt" und 150 "fällt" vorhersagen, lautet die finale Prognose "steigt".</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="aspect-video">
+                           <iframe class="w-full h-full rounded-lg shadow-md" src="https://www.youtube.com/embed/iLcSBLZGI-c" title="YouTube-Video-Player: Random Forest erklärt" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-8 mb-4">15 Reale Anwendungsbeispiele</h3>
+                <ul class="list-disc list-inside grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2 text-sm">
+                    <li><strong>Finanzwesen:</strong> Aktienmarktvorhersage</li>
+                    <li><strong>E-Commerce:</strong> Produktempfehlungssysteme</li>
+                    <li><strong>Medizin:</strong> Vorhersage von Diabetes-Risiko<sup class="footnote-ref">[3]</sup></li>
+                    <li><strong>Genomik:</strong> Identifikation krankheitsrelevanter Gene</li>
+                    <li><strong>Bildklassifikation:</strong> Erkennung von Objekten in Bildern</li>
+                    <li><strong>Fernerkundung:</strong> Landnutzungsklassifikation aus Satellitendaten</li>
+                    <li><strong>Ökologie:</strong> Vorhersage von Artenverteilungen</li>
+                    <li><strong>Betrugserkennung:</strong> Identifizierung von Kreditkartenbetrug</li>
+                    <li><strong>Industrie 4.0:</strong> Vorausschauende Wartung (Predictive Maintenance)</li>
+                    <li><strong>Kundenanalyse:</strong> Vorhersage des Customer Lifetime Value</li>
+                    <li><strong>Landwirtschaft:</strong> Klassifizierung von Nutzpflanzenkrankheiten</li>
+                    <li><strong>Verkehrsplanung:</strong> Vorhersage von Verkehrsstaus</li>
+                    <li><strong>Wetter:</strong> Klassifikation von Wetterphänomenen</li>
+                    <li><strong>Chemie:</strong> Vorhersage der Toxizität von Substanzen</li>
+                    <li><strong>Personalwesen:</strong> Bewerbervorauswahl basierend auf Lebensläufen</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mt-8 mb-2">Analyse und Reflexion</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h4 class="font-bold text-green-800 mb-2">Besonders geeignet für:</h4>
+                        <ul class="list-disc list-inside">
+                            <li>Hohe Genauigkeit und Robustheit</li>
+                            <li>Tabellarische Daten mit vielen Merkmalen</li>
+                            <li>Verhinderung von Overfitting</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <h4 class="font-bold text-red-800 mb-2">Weniger geeignet für:</h4>
+                        <ul class="list-disc list-inside">
+                            <li>Wenn volle Interpretierbarkeit gefordert ist (ist eine "Black Box")</li>
+                            <li>Sehr hochdimensionale, dünn besetzte Daten (z.B. Text)</li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="mt-6 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
+                    <h4 class="font-bold text-blue-800 mb-2">Vergleich mit Anderen</h4>
+                    <p class="text-sm">Ein Random Forest ist fast immer einem einzelnen **Entscheidungsbaum** in Bezug auf die Genauigkeit überlegen. Bei vielen Problemen mit tabellarischen Daten kann er mit der Leistung von **SVMs** und sogar einfachen **Neuronalen Netzen** mithalten oder diese übertreffen, ist aber oft einfacher zu trainieren.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SVM Section -->
+        <section id="svm" class="content-section">
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">Support Vector Machines (SVM)</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Grundprinzipien und Funktionsweise</h3>
+                        <p>Eine SVM sucht die optimale Trennlinie (Hyperebene), die zwei Datenklassen mit dem größtmöglichen Abstand (Marge) voneinander trennt. Die Datenpunkte, die diese Marge definieren, heißen „Support Vectors“. Durch den „Kernel-Trick“ kann die SVM auch nicht-linear trennbare Daten in höhere Dimensionen überführen und dort eine lineare Trennung finden.<sup class="footnote-ref">[4]</sup></p>
+
+                        <h3 class="text-xl font-semibold mt-6 mb-2">Demonstration: E-Mail-Filter</h3>
+                        <p class="mb-4">Eine SVM klassifiziert E-Mails als "Spam" oder "Kein Spam". Merkmale sind z.B. die Häufigkeit des Wortes "Angebot" und das Vorhandensein eines Anhangs.</p>
+                        <div class="border-l-4 border-gray-300 pl-4 text-sm">
+                            <p class="mb-2"><strong>1. Darstellung:</strong> Alle Trainings-E-Mails werden in einem 2D-Diagramm platziert.</p>
+                            <p class="mb-2"><strong>2. Trennung:</strong> Die SVM findet die Linie, die den Abstand zwischen den nächstgelegenen Spam- und Nicht-Spam-Mails maximiert.</p>
+                            <p class="font-bold"><strong>Ergebnis:</strong> Eine neue Mail wird je nach Position zur Trennlinie klassifiziert.</p>
+                        </div>
+                    </div>
+                    <div>
+                         <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=SVM+mit+maximaler+Marge" alt="Bild einer Support Vector Machine" class="rounded-lg shadow-md">
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-8 mb-4">15 Reale Anwendungsbeispiele</h3>
+                <ul class="list-disc list-inside grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2 text-sm">
+                    <li><strong>Bioinformatik:</strong> Klassifizierung von Krebsgewebe vs. gesundem Gewebe<sup class="footnote-ref">[5]</sup></li>
+                    <li><strong>Gesichtserkennung:</strong> Unterscheidung von Gesichtern und Nicht-Gesichtern in Bildern</li>
+                    <li><strong>Handschrifterkennung:</strong> Klassifizierung von Ziffern und Buchstaben<sup class="footnote-ref">[4]</sup></li>
+                    <li><strong>Textkategorisierung:</strong> Zuordnung von Nachrichtenartikeln zu Themen</li>
+                    <li><strong>Finanzwesen:</strong> Vorhersage von Aktienkursbewegungen (steigend/fallend)</li>
+                    <li><strong>Bilderkennung:</strong> Objekterkennung in Satellitenbildern</li>
+                    <li><strong>Geologie:</strong> Klassifikation von Gesteinsarten</li>
+                    <li><strong>Qualitätskontrolle:</strong> Erkennung von Defekten in Industrieprodukten</li>
+                    <li><strong>Sentiment-Analyse:</strong> Einordnung von Kundenrezensionen als positiv/negativ</li>
+                    <li><strong>Medizinische Bildgebung:</strong> Erkennung von Tumoren in MRT-Scans</li>
+                    <li><strong>Chemie:</strong> Vorhersage der chemischen Aktivität von Molekülen</li>
+                    <li><strong>Astronomie:</strong> Klassifikation von Sternen und Galaxien</li>
+                    <li><strong>Cybersicherheit:</strong> Erkennung von Netzwerk-Intrusionen</li>
+                    <li><strong>Robotik:</strong> Steuerung von Roboterarmen basierend auf visuellen Signalen</li>
+                    <li><strong>Musik-Analyse:</strong> Klassifikation von Musikstücken nach Genre</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold mt-8 mb-2">Analyse und Reflexion</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h4 class="font-bold text-green-800 mb-2">Besonders geeignet für:</h4>
+                        <ul class="list-disc list-inside">
+                            <li>Hochdimensionale Daten (viele Merkmale)</li>
+                            <li>Klare Trennbarkeit der Klassen</li>
+                             <li>Kleine bis mittlere Datensätze, bei denen es auf hohe Genauigkeit ankommt</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <h4 class="font-bold text-red-800 mb-2">Weniger geeignet für:</h4>
+                        <ul class="list-disc list-inside">
+                            <li>Sehr große, rechenintensive Trainingsdatensätze</li>
+                            <li>Stark verrauschte Daten mit überlappenden Klassen</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-6 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
+                    <h4 class="font-bold text-blue-800 mb-2">Vergleich mit Anderen</h4>
+                    <p class="text-sm">SVMs sind oft überlegen, wenn die **Datenmenge begrenzt**, aber die **Anzahl der Merkmale hoch** ist. Ihre mathematisch fundierte Basis führt oft zu einer sehr guten Generalisierungsleistung. **Neuronale Netze** benötigen in der Regel **mehr Daten**, können dann aber **komplexere Merkmale** selbstständig aus Rohdaten lernen.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- k-Means Section -->
+        <section id="kmeans" class="content-section">
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">k-Means-Clustering</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Grundprinzipien und Funktionsweise</h3>
+                        <p>k-Means ist ein unüberwachtes Verfahren, das Datenpunkte in 'k' vordefinierte Cluster gruppiert. Der Algorithmus platziert 'k' Zentren (Zentroide) und weist jeden Datenpunkt dem nächstgelegenen Zentrum zu. Dann werden die Zentren neu im Mittelpunkt ihrer zugewiesenen Punkte positioniert. Dieser Vorgang wird wiederholt, bis sich die Zentren stabilisieren.<sup class="footnote-ref">[6]</sup></p>
+
+                        <h3 class="text-xl font-semibold mt-6 mb-2">Demonstration: Kundensegmentierung</h3>
+                        <p class="mb-4">Ein Online-Shop will seine Kunden gruppieren. Merkmale sind Kaufhäufigkeit und durchschnittlicher Warenkorbwert.</p>
+                        <div class="border-l-4 border-gray-300 pl-4 text-sm">
+                            <p class="mb-2"><strong>1. Initialisierung (k=3):</strong> Setze 3 zufällige Cluster-Zentren in das Diagramm.</p>
+                            <p class="mb-2"><strong>2. Zuweisung & Update:</strong> Jeder Kunde wird dem nächsten Zentrum zugeordnet. Die Zentren werden in die Mitte ihrer neuen Gruppen verschoben. Wiederholung folgt.</p>
+                            <p class="font-bold"><strong>Ergebnis:</strong> 3 stabile Kundengruppen, z.B. "Sparfüchse", "Stammkunden" und "Premium-Käufer".</p>
+                        </div>
+                    </div>
+                    <div>
+                         <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=k-Means+Cluster-Bildung" alt="Bild von k-Means Clustering" class="rounded-lg shadow-md">
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-8 mb-4">15 Reale Anwendungsbeispiele</h3>
+                <ul class="list-disc list-inside grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2 text-sm">
+                    <li><strong>Marketing:</strong> Kundensegmentierung nach Kaufverhalten<sup class="footnote-ref">[6]</sup></li>
+                    <li><strong>Stadtplanung:</strong> Optimale Standortwahl für Infrastruktur (z.B. Schulen)</li>
+                    <li><strong>Biologie:</strong> Gruppierung von Genen mit ähnlichen Expressionsmustern</li>
+                    <li><strong>Dokumentenanalyse:</strong> Thematische Gruppierung von Artikeln oder Büchern</li>
+                    <li><strong>Bildverarbeitung:</strong> Farbquantisierung zur Komprimierung von Bildern</li>
+                    <li><strong>Logistik:</strong> Optimierung von Lieferzonen für Zusteller</li>
+                    <li><strong>Sozialwissenschaften:</strong> Analyse von sozialen Netzwerken und Community-Erkennung</li>
+                    <li><strong>Cybersicherheit:</strong> Erkennung von Anomalien im Netzwerkverkehr (Botnets)</li>
+                    <li><strong>Astronomie:</strong> Identifizierung von Sterngruppen und Galaxienhaufen</li>
+                    <li><strong>Versicherung:</strong> Gruppierung von Kunden nach Risikoprofilen</li>
+                    <li><strong>Genetik:</strong> Analyse von DNA-Sequenzen und Populationsstrukturen</li>
+                    <li><strong>Sportanalyse:</strong> Gruppierung von Spielern nach Spielstil und Leistung</li>
+                    <li><strong>Marktforschung:</strong> Identifikation von Marktsegmenten</li>
+                    <li><strong>Suchmaschinen:</strong> Gruppierung ähnlicher Suchergebnisse</li>
+                    <li><strong>Medizin:</strong> Einteilung von Patienten in Risikogruppen für Epidemien</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold mt-8 mb-2">Analyse und Reflexion</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h4 class="font-bold text-green-800 mb-2">Besonders geeignet für:</h4>
+                        <ul class="list-disc list-inside">
+                            <li>Schnelle, explorative Datenanalyse zur Strukturerkennung</li>
+                            <li>Große Datensätze aufgrund hoher Effizienz</li>
+                            <li>Wenn Cluster eine kugelförmige Struktur haben</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <h4 class="font-bold text-red-800 mb-2">Weniger geeignet für:</h4>
+                        <ul class="list-disc list-inside">
+                            <li>Cluster mit komplexen Formen (z.B. länglich, Donut-Form)</li>
+                            <li>Daten mit vielen Ausreißern oder ungleicher Cluster-Dichte</li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="mt-6 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
+                    <h4 class="font-bold text-blue-800 mb-2">Vergleich mit Anderen</h4>
+                    <p class="text-sm">k-Means ist ein einfacher, schneller Algorithmus zur **Entdeckung von Gruppen**. Für komplexere Strukturen sind jedoch unüberwachte neuronale Netze wie **Autoencoder** überlegen, da sie auch **nicht-lineare Cluster-Strukturen** finden können.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Naive Bayes Section -->
+        <section id="naive-bayes" class="content-section">
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">Naive Bayes</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Grundprinzipien und Funktionsweise</h3>
+                        <p>Naive Bayes ist ein probabilistischer Klassifikator, der auf dem Bayes-Theorem basiert. Er ist "naiv", weil er annimmt, dass alle Merkmale eines Datenpunkts unabhängig voneinander sind. Trotz dieser unrealistischen Annahme funktioniert er in der Praxis oft erstaunlich gut, insbesondere bei Textdaten.<sup class="footnote-ref">[7]</sup></p>
+
+                        <h3 class="text-xl font-semibold mt-6 mb-2">Demonstration: Spam-Filterung</h3>
+                        <p class="mb-4">Eine E-Mail enthält die Wörter "kostenlos", "Angebot" und "jetzt".</p>
+                        <div class="border-l-4 border-gray-300 pl-4 text-sm">
+                            <p class="mb-2"><strong>1. Lernen:</strong> Der Filter kennt die Wahrscheinlichkeit jedes Wortes in Spam- vs. Nicht-Spam-Mails aus den Trainingsdaten.</p>
+                            <p class="mb-2"><strong>2. Berechnung:</strong> Er multipliziert die Wahrscheinlichkeiten der Wörter ("kostenlos", "Angebot", "jetzt") für die Klasse "Spam". Dasselbe für die Klasse "Kein Spam".</p>
+                            <p class="font-bold"><strong>Ergebnis:</strong> Die Klasse mit der höheren resultierenden Wahrscheinlichkeit wird als Vorhersage gewählt (wahrscheinlich "Spam").</p>
+                        </div>
+                    </div>
+                     <div>
+                         <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Naive+Bayes+Wahrscheinlichkeiten" alt="Bild zu Naive Bayes" class="rounded-lg shadow-md">
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-8 mb-4">15 Reale Anwendungsbeispiele</h3>
+                <ul class="list-disc list-inside grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2 text-sm">
+                    <li><strong>E-Mail-Filterung:</strong> Klassifikation von Spam und Ham<sup class="footnote-ref">[7]</sup></li>
+                    <li><strong>Sentiment-Analyse:</strong> Erkennung der Tonalität in Kundenrezensionen</li>
+                    <li><strong>Dokumentenklassifikation:</strong> Automatische Zuweisung von Artikeln zu Kategorien</li>
+                    <li><strong>Medizinische Diagnose:</strong> Vorhersage von Krankheiten anhand von Symptomen</li>
+                    <li><strong>Wettervorhersage:</strong> Vorhersage, ob das Wetter zum Spielen geeignet ist</li>
+                    <li><strong>Gesichtserkennung:</strong> Rudimentäre Erkennung von Emotionen</li>
+                    <li><strong>Empfehlungssysteme:</strong> Vorhersage, ob ein Nutzer einen Film mögen wird</li>
+                    <li><strong>Autoren-Identifikation:</strong> Bestimmung des Autors eines anonymen Textes</li>
+                    <li><strong>Sprachenerkennung:</strong> Identifikation der Sprache eines Textdokuments</li>
+                    <li><strong>Betrugserkennung:</strong> Identifizierung verdächtiger Finanztransaktionen</li>
+                    <li><strong>Gen-Klassifikation:</strong> Zuordnung von Genen zu funktionellen Gruppen</li>
+                    <li><strong>Kredit-Scoring:</strong> Einfache Klassifizierung von Antragstellern</li>
+                    <li><strong>Nachrichten-Priorisierung:</strong> Sortierung von Nachrichten nach Relevanz für einen Nutzer</li>
+                    <li><strong>Fehlerklassifikation:</strong> Automatische Zuweisung von Software-Bugs zu Teams</li>
+                    <li><strong>Echtzeit-Vorhersagen:</strong> Schnelle Klassifikation in Streaming-Daten-Szenarien</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold mt-8 mb-2">Analyse und Reflexion</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h4 class="font-bold text-green-800 mb-2">Besonders geeignet für:</h4>
+                        <ul class="list-disc list-inside">
+                            <li>Textklassifikationsaufgaben (Spam, Sentiment)</li>
+                            <li>Sehr schnelle Trainings- und Vorhersagezeiten</li>
+                            <li>Wenn eine gute Baseline für ein Problem benötigt wird</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <h4 class="font-bold text-red-800 mb-2">Weniger geeignet für:</h4>
+                        <ul class="list-disc list-inside">
+                            <li>Probleme, bei denen die Abhängigkeit zwischen Merkmalen wichtig ist</li>
+                            <li>Numerische Daten, die nicht einfach zu kategorisieren sind</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-6 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
+                    <h4 class="font-bold text-blue-800 mb-2">Vergleich mit Anderen</h4>
+                    <p class="text-sm">Naive Bayes ist eine **schnelle Baseline** für Textprobleme. Moderne neuronale Netze wie **LSTMs** und **Transformer** sind weit überlegen, wenn der **Kontext und die Wortreihenfolge** entscheidend sind, da Naive Bayes einen Text nur als "Tüte voller Wörter" (Bag of Words) betrachtet.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LSTM Section -->
+        <section id="lstm" class="content-section">
+             <div class="bg-white p-8 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">LSTM (Long Short-Term Memory)</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Grundprinzipien und Funktionsweise</h3>
+                        <p>LSTMs sind eine spezielle Art von rekurrenten neuronalen Netzen (RNNs), die für die Verarbeitung von Sequenzdaten (z.B. Text, Zeitreihen) konzipiert sind. Sie lösen das Problem des "verschwindenden Gradienten" einfacher RNNs durch eine "Zell-Struktur" mit drei Toren (Gates): einem Forget-Gate, einem Input-Gate und einem Output-Gate. Diese Tore ermöglichen es dem Netzwerk, Informationen über lange Zeiträume zu speichern, zu aktualisieren und zu vergessen, wodurch es komplexe Abhängigkeiten in Sequenzen lernen kann.<sup class="footnote-ref">[8]</sup></p>
+
+                        <h3 class="text-xl font-semibold mt-6 mb-2">Demonstration: Sprachübersetzung</h3>
+                        <p class="mb-4">Ein Satz soll vom Deutschen ins Englische übersetzt werden.</p>
+                        <div class="border-l-4 border-gray-300 pl-4 text-sm">
+                            <p class="mb-2"><strong>1. Encoding:</strong> Ein LSTM-Encoder liest den deutschen Satz Wort für Wort und komprimiert dessen Bedeutung in einen Kontextvektor (ein "Gedächtnis" des Satzes).</p>
+                            <p class="mb-2"><strong>2. Decoding:</strong> Ein LSTM-Decoder nimmt diesen Vektor und generiert den englischen Satz Wort für Wort. Bei jedem Schritt berücksichtigt er, was er bereits generiert hat und den Kontext des Originals.</p>
+                            <p class="font-bold"><strong>Ergebnis:</strong> Eine kohärente Übersetzung, die den Satzbau und die Bedeutung berücksichtigt.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=LSTM-Zellstruktur+mit+Gates" alt="Bild einer LSTM-Zelle" class="rounded-lg shadow-md">
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-8 mb-4">15 Reale Anwendungsbeispiele</h3>
+                <ul class="list-disc list-inside grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2 text-sm">
+                    <li><strong>Maschinelle Übersetzung:</strong> Google Translate (frühere Versionen)</li>
+                    <li><strong>Spracherkennung:</strong> Transkription von gesprochener Sprache in Text</li>
+                    <li><strong>Zeitreihenanalyse:</strong> Aktienkurs- und Wettervorhersage</li>
+                    <li><strong>Musikkomposition:</strong> Generierung neuer Melodien im Stil eines Komponisten</li>
+                    <li><strong>Handschrifterkennung und -generierung</strong></li>
+                    <li><strong>Videoanalyse:</strong> Klassifikation von Aktivitäten in Videosequenzen</li>
+                    <li><strong>Sentiment-Analyse:</strong> Erkennung der Emotion in längeren Texten</li>
+                    <li><strong>Chatbots und Dialogsysteme:</strong> Aufrechterhaltung eines Gesprächskontexts</li>
+                    <li><strong>Code-Vervollständigung:</strong> In älteren IDE-Plugins</li>
+                    <li><strong>Anomalieerkennung:</strong> In industriellen Sensor-Zeitreihen</li>
+                    <li><strong>Robotik:</strong> Steuerung von Roboterbewegungen über Zeit</li>
+                    <li><strong>Pharma:</strong> Vorhersage von Protein-Sekundärstrukturen</li>
+                    <li><strong>Verkehrsfluss-Prognose</strong></li>
+                    <li><strong>Generierung von Textzusammenfassungen</strong></li>
+                    <li><strong>Rechtschreibung und Grammatikkorrektur</strong></li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mt-8 mb-2">Analyse und Reflexion</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h4 class="font-bold text-green-800 mb-2">Besonders geeignet für:</h4>
+                        <ul class="list-disc list-inside">
+                            <li>Sequenzdaten aller Art (Text, Zeit, Audio)</li>
+                            <li>Lernen von Langzeit-Abhängigkeiten</li>
+                            <li>Wenn die Reihenfolge der Daten entscheidend ist</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <h4 class="font-bold text-red-800 mb-2">Weniger geeignet für:</h4>
+                        <ul class="list-disc list-inside">
+                            <li>Parallele Verarbeitung (sind von Natur aus sequentiell)</li>
+                            <li>Sehr lange Sequenzen, bei denen Transformer überlegen sind</li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="mt-6 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
+                    <h4 class="font-bold text-blue-800 mb-2">Vergleich mit Anderen</h4>
+                    <p class="text-sm">LSTMs waren ein gewaltiger Fortschritt gegenüber einfachen **RNNs**. Inzwischen wurden sie jedoch bei den meisten großen NLP-Aufgaben von **Transformer-Modellen** abgelöst. Der Grund: Transformer können Abhängigkeiten über noch größere Distanzen modellieren und sind – im Gegensatz zu LSTMs – hochgradig parallelisierbar, was das Training auf riesigen Datensätzen erst ermöglicht.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transformer Section -->
+        <section id="transformer" class="content-section">
+             <div class="bg-white p-8 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">Transformer (Attention) Modelle</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Grundprinzipien und Funktionsweise</h3>
+                        <p>Transformer-Modelle haben die Verarbeitung natürlicher Sprache (NLP) revolutioniert. Sie verzichten vollständig auf rekurrente Schleifen und setzen stattdessen auf einen Mechanismus namens **Self-Attention**. Dieser erlaubt es dem Modell, bei der Verarbeitung eines Wortes die Wichtigkeit und den Kontext aller anderen Wörter im Satz zu bewerten und zu gewichten. Dies ermöglicht eine parallele Verarbeitung der gesamten Sequenz und ein überragendes Verständnis für weitreichende Zusammenhänge.<sup class="footnote-ref">[9]</sup></p>
+
+                        <h3 class="text-xl font-semibold mt-6 mb-2">Demonstration: Frage-Antwort-System</h3>
+                        <p class="mb-4">Ein Nutzer stellt eine Frage zu einem Wikipedia-Artikel: "Wer hat die Relativitätstheorie entwickelt?"</p>
+                        <div class="border-l-4 border-gray-300 pl-4 text-sm">
+                            <p class="mb-2"><strong>1. Input:</strong> Das Modell (z.B. BERT) erhält die Frage und den Artikeltext.</p>
+                            <p class="mb-2"><strong>2. Self-Attention:</strong> Das Modell analysiert, welche Wörter in der Frage ("Wer", "entwickelt") mit welchen Wörtern im Text ("Einstein", "publizierte") in starker Beziehung stehen.</p>
+                            <p class="font-bold"><strong>Ergebnis:</strong> Das Modell extrahiert die exakte Textstelle "Albert Einstein" als Antwort, weil die Attention-Gewichte hier am höchsten sind.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Self-Attention-Mechanismus" alt="Bild des Attention-Mechanismus" class="rounded-lg shadow-md">
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-8 mb-4">15 Reale Anwendungsbeispiele</h3>
+                <ul class="list-disc list-inside grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2 text-sm">
+                    <li><strong>Große Sprachmodelle:</strong> Basis für GPT-4, BERT, etc.<sup class="footnote-ref">[9]</sup></li>
+                    <li><strong>Moderne Chatbots und virtuelle Assistenten</strong></li>
+                    <li><strong>Textgenerierung:</strong> Verfassen von Artikeln, Gedichten, Code</li>
+                    <li><strong>Fortgeschrittene maschinelle Übersetzung</strong></li>
+                    <li><strong>Textzusammenfassung für lange Dokumente</strong></li>
+                    <li><strong>Semantische Suche:</strong> Verstehen der Suchanfrage statt nur Keyword-Matching</li>
+                    <li><strong>Computer Vision:</strong> Bilderkennung und -klassifikation (Vision Transformers)</li>
+                    <li><strong>Wirkstoff- und Proteinforschung:</strong> AlphaFold zur Vorhersage von Proteinfaltungen</li>
+                    <li><strong>Code-Generierung:</strong> GitHub Copilot</li>
+                    <li><strong>Empfehlungssysteme:</strong> Besseres Verständnis von Nutzerpräferenzen</li>
+                    <li><strong>Analyse von juristischen Dokumenten</strong></li>
+                    <li><strong>Automatisierte Untertitelung von Videos</strong></li>
+                    <li><strong>Daten-Augmentation:</strong> Erzeugung synthetischer Trainingsdaten</li>
+                    <li><strong>Software-Bug-Analyse und -Behebung</strong></li>
+                    <li><strong>Personalisierte Bildung:</strong> Erstellung adaptiver Lernmaterialien</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mt-8 mb-2">Analyse und Reflexion</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h4 class="font-bold text-green-800 mb-2">Besonders geeignet für:</h4>
+                        <ul class="list-disc list-inside">
+                            <li>Alle anspruchsvollen NLP-Aufgaben</li>
+                            <li>Hochgradig parallele Verarbeitung auf GPUs</li>
+                            <li>Modellierung von sehr weitreichenden Abhängigkeiten</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <h4 class="font-bold text-red-800 mb-2">Weniger geeignet für:</h4>
+                        <ul class="list-disc list-inside">
+                            <li>Kleine Datensätze (extrem "daten-hungrig")</li>
+                            <li>Aufgaben mit begrenzten Rechenressourcen</li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="mt-6 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
+                    <h4 class="font-bold text-blue-800 mb-2">Vergleich mit Anderen</h4>
+                    <p class="text-sm">Transformer sind der De-facto-Standard in der modernen KI und haben **LSTMs** in fast allen Bereichen der Sprachverarbeitung abgelöst. Ihre Fähigkeit zur Parallelisierung und das überlegene Kontextverständnis durch Attention machen sie leistungsfähiger. Im Vergleich zu klassischen Modellen wie **SVMs** oder **Random Forests** sind sie für unstrukturierte Daten (Text, Bild) um Größenordnungen mächtiger, aber auch ungleich komplexer und rechenintensiver.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer with Sources -->
+    <footer class="bg-gray-800 text-white mt-12 py-8">
+        <div class="container mx-auto px-6">
+            <h3 class="text-lg font-semibold mb-4">Quellen und Fußnoten</h3>
+            <ol class="list-decimal list-inside text-sm space-y-2">
+                <li>Yonyx. (n.d.). *Decision tree examples and use cases*. Abgerufen von corp.yonyx.com/decision-tree-examples/</li>
+                <li>Lyzr AI. (n.d.). *What is a Decision Tree?*. Abgerufen von www.lyzr.ai/glossaries/decision-trees/</li>
+                <li>Javatpoint. (n.d.). *Random Forest Algorithm*. Abgerufen von www.javatpoint.com/machine-learning-random-forest-algorithm</li>
+                <li>Aylien. (2015, September 21). *Support Vector Machines for dummies; A Simple Explanation*. Abgerufen von aylien.com/blog/support-vector-machines-for-dummies-a-simple-explanation</li>
+                <li>DataFlair. (n.d.). *Real-Life Applications of SVM (Support Vector Machines)*. Abgerufen von data-flair.training/blogs/applications-of-svm/</li>
+                <li>SkillCamper. (2024, Februar 18). *Real-World Applications of the K-Means Algorithm in Data Science*. Abgerufen von www.skillcamper.com/blog/real-world-applications-of-the-k-means-algorithm-in-data-science</li>
+                <li>IBM. (n.d.). *What Are Naïve Bayes Classifiers?*. Abgerufen von www.ibm.com/think/topics/naive-bayes</li>
+                <li>Colah's Blog. (2015, August 27). *Understanding LSTM Networks*. Abgerufen von colah.github.io/posts/2015-08-Understanding-LSTMs/</li>
+                <li>Vaswani, A. et al. (2017). *Attention Is All You Need*. Abgerufen von arxiv.org/abs/1706.03762</li>
+            </ol>
+        </div>
+    </footer>
+
+    <script>
+        const sections = document.querySelectorAll('.content-section');
+        const tabs = document.querySelectorAll('.tab-button');
+
+        function showSection(id) {
+            sections.forEach(section => {
+                if (section.id === id) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+            tabs.forEach(tab => {
+                if (tab.getAttribute('onclick').includes(`'${id}'`)) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+             window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>
