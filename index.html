@@ -55,6 +55,7 @@
             <div class="container mx-auto px-6 scroll-container">
                 <div class="flex">
                     <button class="tab-button active py-3 px-4 text-sm font-medium text-gray-500 hover:text-blue-500 focus:outline-none" onclick="showSection('intro')">Einleitung</button>
+                    <button class="tab-button py-3 px-4 text-sm font-medium text-gray-500 hover:text-blue-500 focus:outline-none" onclick="showSection('learning-types')">Lernarten</button>
                     <button class="tab-button py-3 px-4 text-sm font-medium text-gray-500 hover:text-blue-500 focus:outline-none" onclick="showSection('decision-trees')">Entscheidungsbäume</button>
                     <button class="tab-button py-3 px-4 text-sm font-medium text-gray-500 hover:text-blue-500 focus:outline-none" onclick="showSection('random-forest')">Random Forest</button>
                     <button class="tab-button py-3 px-4 text-sm font-medium text-gray-500 hover:text-blue-500 focus:outline-none" onclick="showSection('svm')">Support Vector Machines</button>
@@ -83,10 +84,68 @@
             </div>
         </section>
 
+        <!-- Learning Types Section -->
+        <section id="learning-types" class="content-section">
+             <div class="bg-white p-8 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">Arten des maschinellen Lernens</h2>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-blue-700">1. Überwachtes Lernen (Supervised Learning)</h3>
+                        <p class="mb-3">Das ist wie Lernen mit einem Lehrer oder einem Lösungsheft. Man gibt dem Computer viele Beispiele, bei denen die richtige Antwort bereits bekannt ist. Der Computer lernt dann die Regeln, um für neue, unbekannte Daten selbst die richtige Antwort vorherzusagen.</p>
+                        <p class="font-semibold">Ziel: Vorhersagen treffen.</p>
+                        <div class="mt-3 pl-4 border-l-2 border-gray-200">
+                            <p class="font-semibold text-gray-700">Beispiele, die wir besprochen haben:</p>
+                            <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
+                                <li><strong>Entscheidungsbäume und Random Forest:</strong> Entscheiden anhand einer Reihe von „Wenn-Dann“-Fragen (z.B. bei der Kreditprüfung).</li>
+                                <li><strong>Support Vector Machines (SVM):</strong> Finden die bestmögliche Trennlinie zwischen zwei Gruppen (z.B. Spam vs. kein Spam).</li>
+                                <li><strong>Naive Bayes:</strong> Trifft Vorhersagen basierend auf Wahrscheinlichkeiten (z.B. Spam-Filterung).</li>
+                                <li><strong>LSTM und Transformer:</strong> Sind ebenfalls überwachte Verfahren, wenn sie zum Beispiel für die Übersetzung oder Textklassifikation trainiert werden.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-green-700">2. Unüberwachtes Lernen (Unsupervised Learning)</h3>
+                        <p class="mb-3">Das ist wie Lernen ohne Lehrer. Man gibt dem Computer einen Haufen unsortierter Daten und bittet ihn, von selbst interessante Muster, Strukturen oder Gruppen zu finden.</p>
+                        <p class="font-semibold">Ziel: Strukturen entdecken.</p>
+                        <div class="mt-3 pl-4 border-l-2 border-gray-200">
+                             <p class="font-semibold text-gray-700">Beispiel, das wir besprochen haben:</p>
+                             <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
+                                <li><strong>k-Means-Clustering:</strong> Findet automatisch Gruppen (Cluster) in den Daten (z.B. um Kunden mit ähnlichem Kaufverhalten zu gruppieren).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-purple-700">3. Bestärkendes Lernen (Reinforcement Learning)</h3>
+                        <p class="mb-3">Das ist wie das Training eines Haustiers mit Belohnungen. Der Computer (ein „Agent“) lernt, indem er Dinge in einer Umgebung ausprobiert. Für gute Aktionen bekommt er eine Belohnung, für schlechte eine Bestrafung. Mit der Zeit lernt er, welche Strategie zur höchsten Belohnung führt.</p>
+                         <p class="font-semibold">Ziel: Die beste Handlungsstrategie erlernen.</p>
+                         <div class="mt-3 pl-4 border-l-2 border-gray-200">
+                             <p class="font-semibold text-gray-700">Beispiele (noch nicht im Detail besprochen):</p>
+                             <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
+                                <li>Ein Computer, der lernt, ein Brettspiel wie Schach oder Go auf Weltklasse-Niveau zu spielen.</li>
+                                <li>Ein Roboter, der lernt, durch Versuch und Irrtum zu laufen.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400">
+                         <h3 class="text-xl font-semibold mb-2 text-yellow-800">Sonderfall: Deep Learning</h3>
+                         <p class="text-sm">Die Verfahren <strong>LSTM</strong> und <strong>Transformer</strong> gehören zu einem speziellen und sehr mächtigen Bereich des maschinellen Lernens, dem Deep Learning. Deep Learning nutzt künstliche neuronale Netze mit vielen Schichten (daher „tief“), um extrem komplexe Muster zu lernen. Es ist keine eigene Kategorie wie die drei oben genannten, sondern eher eine sehr fortgeschrittene Technik, die für alle drei Arten von Lernen eingesetzt werden kann.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <!-- Decision Trees Section -->
         <section id="decision-trees" class="content-section">
              <div class="bg-white p-8 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-bold mb-4">Entscheidungsbäume (Decision Trees)</h2>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold">Entscheidungsbäume (Decision Trees)</h2>
+                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-1 rounded-full">Überwachtes Lernen</span>
+                </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
@@ -154,7 +213,10 @@
         <!-- Random Forest Section -->
         <section id="random-forest" class="content-section">
              <div class="bg-white p-8 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-bold mb-4">Random Forest</h2>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold">Random Forest</h2>
+                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-1 rounded-full">Überwachtes Lernen</span>
+                </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
@@ -223,7 +285,10 @@
         <!-- SVM Section -->
         <section id="svm" class="content-section">
             <div class="bg-white p-8 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-bold mb-4">Support Vector Machines (SVM)</h2>
+                 <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold">Support Vector Machines (SVM)</h2>
+                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-1 rounded-full">Überwachtes Lernen</span>
+                </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
@@ -292,7 +357,10 @@
         <!-- k-Means Section -->
         <section id="kmeans" class="content-section">
             <div class="bg-white p-8 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-bold mb-4">k-Means-Clustering</h2>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold">k-Means-Clustering</h2>
+                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-1 rounded-full">Unüberwachtes Lernen</span>
+                </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
@@ -361,7 +429,10 @@
         <!-- Naive Bayes Section -->
         <section id="naive-bayes" class="content-section">
             <div class="bg-white p-8 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-bold mb-4">Naive Bayes</h2>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold">Naive Bayes</h2>
+                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-1 rounded-full">Überwachtes Lernen</span>
+                </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
@@ -428,7 +499,13 @@
         <!-- LSTM Section -->
         <section id="lstm" class="content-section">
              <div class="bg-white p-8 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-bold mb-4">LSTM (Long Short-Term Memory)</h2>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold">LSTM (Long Short-Term Memory)</h2>
+                    <div>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-1 rounded-full">Überwachtes Lernen</span>
+                        <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-1 rounded-full">Deep Learning</span>
+                    </div>
+                </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
@@ -495,7 +572,13 @@
         <!-- Transformer Section -->
         <section id="transformer" class="content-section">
              <div class="bg-white p-8 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-bold mb-4">Transformer (Attention) Modelle</h2>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold">Transformer (Attention) Modelle</h2>
+                    <div>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-1 rounded-full">Überwachtes Lernen</span>
+                        <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-1 rounded-full">Deep Learning</span>
+                    </div>
+                </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
@@ -511,7 +594,9 @@
                         </div>
                     </div>
                     <div>
-                        <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Self-Attention-Mechanismus" alt="Bild des Attention-Mechanismus" class="rounded-lg shadow-md">
+                        <div class="aspect-video">
+                           <iframe class="w-full h-full rounded-lg shadow-md" src="https://www.youtube.com/embed/3AoOQyrvYhQ" title="YouTube-Video-Player: Transformer Modelle erklärt" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
                     </div>
                 </div>
 
